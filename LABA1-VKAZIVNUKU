@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+#include <cstdlib>
+#include <ctime>
+
+int main()
+{
+    int array[5][5];
+    int* arrayPtr = *array; 
+
+    srand(time(NULL));
+
+    for (int i = 0; i < 5 * 5; ++i) {
+        *arrayPtr = rand() % 10;
+        arrayPtr++; 
+    }
+
+    cout << "Elements on the general diagonal:" << endl;
+    int* generalDiagPtr = *array; 
+    for (int i = 0; i < 5; ++i) {
+        cout << *generalDiagPtr << " ";
+        generalDiagPtr += 6; 
+    }
+    cout << endl;
+
+    cout << "Elements on the side diagonal:" << endl;
+    int* sideDiagPtr = *array + 4; 
+
+    for (int i = 0; i < 5; ++i) {
+        cout << *sideDiagPtr << " ";
+        sideDiagPtr += 4; 
+    }
+    cout << endl;
+
+    int evenCount = 0, oddCount = 0;
+    arrayPtr = *array; 
+
+    
+    for (int i = 0; i < 5 * 5; ++i) {
+        if (*arrayPtr % 2 == 0) {
+            evenCount++;
+        }
+        else {
+            oddCount++;
+        }
+        arrayPtr++; 
+    }
+
+    cout << "The number of even elements: " << evenCount << endl;
+    cout << "The number of odd elements: " << oddCount << endl;
+
+    return 0;
+}
